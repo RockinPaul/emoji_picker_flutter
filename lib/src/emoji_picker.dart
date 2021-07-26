@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:emoji_picker_flutter/src/api_service.dart';
 import 'package:emoji_picker_flutter/src/category_emoji.dart';
 import 'package:emoji_picker_flutter/src/config.dart';
 import 'package:emoji_picker_flutter/src/default_emoji_picker_view.dart';
@@ -20,7 +21,7 @@ enum Category {
   /// Recent emojis
   RECENT,
 
-  /// Smiley emojis
+  /// Smiley emojis'
   SMILEYS,
 
   /// Animal emojis
@@ -111,10 +112,15 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Widget build(BuildContext context) {
     if (!loaded) {
       // Load emojis
-      _updateEmojis().then((value) =>
-          WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-                loaded = true;
-              })));
+      _updateEmojis().then(
+        (value) => WidgetsBinding.instance!.addPostFrameCallback(
+          (_) => setState(
+            () {
+              loaded = true;
+            },
+          ),
+        ),
+      );
 
       // Show loading indicator
       return const Center(child: CircularProgressIndicator());
@@ -154,6 +160,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   // Initalize emoji data
   Future<void> _updateEmojis() async {
+
+    fetchEmojis();
+
     categoryEmoji.clear();
     if (widget.config.showRecentsTab) {
       recentEmoji = await _getRecentEmojis();
@@ -182,8 +191,10 @@ class _EmojiPickerState extends State<EmojiPicker> {
   }
 
   // Get available emoji for given category title
-  Future<List<Emoji>> _getAvailableEmojis(Map<String, String> map,
-      {required String title}) async {
+  Future<List<Emoji>> _getAvailableEmojis(
+    Map<String, String> map, {
+    required String title,
+  }) async {
     Map<String, String>? newMap;
 
     // Get Emojis cached locally if available

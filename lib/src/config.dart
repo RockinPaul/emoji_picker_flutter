@@ -34,7 +34,7 @@ class Config {
   /// Can be smaller due to screen size and amount of columns
   final double emojiSizeMax;
 
-  /// Verical spacing between emojis
+  /// Vertical spacing between emojis
   final double verticalSpacing;
 
   /// Horizontal spacing between emojis

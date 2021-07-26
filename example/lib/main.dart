@@ -65,7 +65,9 @@ class _MyAppState extends State<MyApp> {
                         child: TextFormField(
                             controller: _controller,
                             style: const TextStyle(
-                                fontSize: 20.0, color: Colors.black87),
+                              fontSize: 20.0,
+                              color: Colors.black87,
+                            ),
                             decoration: InputDecoration(
                               hintText: 'Type a message',
                               filled: true,
@@ -84,13 +86,14 @@ class _MyAppState extends State<MyApp> {
                     Material(
                       color: Colors.transparent,
                       child: IconButton(
-                          onPressed: () {
-                            // send message
-                          },
-                          icon: const Icon(
-                            Icons.send,
-                            color: Colors.white,
-                          )),
+                        onPressed: () {
+                          // send message
+                        },
+                        icon: const Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ),
+                      ),
                     )
                   ],
                 )),
